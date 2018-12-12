@@ -1,0 +1,28 @@
+.container .event {
+    border: 1px solid #000;
+    margin: 0 0 30px 0;
+}
+
+h3, h2, h1, p {
+    color: #000;
+}
+
+.container .event p {
+    margin: 5px 0;
+}
+
+.container .event .lot-content,
+.container .event .event-content {
+    padding: 5px;
+}
+
+.container .event .event-content h2, h3, p {
+    margin: 0;
+}
+
+.container .event .lot-content h3,
+.container .event .event-content h2 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
