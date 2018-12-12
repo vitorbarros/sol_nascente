@@ -25,4 +25,9 @@ class IndexController extends AbstractActionController
             'events' => $this->eventService->getEvents()
         ]);
     }
+
+    public function detailAction()
+    {
+
+    }
 }

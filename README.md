@@ -75,3 +75,16 @@ project and you should be ready to go! It should look something like below:
             Allow from all
         </Directory>
     </VirtualHost>
+
+
+
+
+
+
+
+
+
+
+
+php public/index.php data-fixture:import
+php public/index.php orm:schema-tool:update --force
