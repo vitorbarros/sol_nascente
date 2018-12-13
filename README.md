@@ -17,7 +17,7 @@ Instalação
 
  clone o projeto para a sua máquina.
 
- `git cone https://github.com/vitorbarros/sol_nascente.git`
+ `git clone https://github.com/vitorbarros/sol_nascente.git`
  
  Acesse a pasta do projeto e execute o seguinte comando
  
@@ -52,14 +52,14 @@ return array(
  );
  ```
  
-  Accesse seu banco de dados e cria o banco vazío 
+  Accesse seu banco de dados e crie o banco.
   de acordo com o nome que colocou na configuração anterior.
   
   Execute o seguinte comando no terminal (tenha certeza que está na pasta do projeto)
   
   `php public/index.php orm:schema-tool:update --force`
   
-  Após a execução desse comando exzecute o seguinte
+  Após a execução desse comando execute o seguinte
   
   `php public/index.php data-fixture:import`
   
@@ -69,15 +69,15 @@ return array(
   
   1 - Apache 
   
-  Caso use o apache será necessári criar um VHost apontando o document root para a psta public do projeto
+  Caso use o apache será necessário criar um VHost apontando o document root para a pasta public do projeto
    
   ### Apache Setup
   
       <VirtualHost *:80>
           ServerName zf2-tutorial.localhost
-          DocumentRoot /path/to/zf2-tutorial/public
+          DocumentRoot /path/to/your-application/public
           SetEnv APPLICATION_ENV "development"
-          <Directory /path/to/zf2-tutorial/public>
+          <Directory /path/to/your-application/public>
               DirectoryIndex index.php
               AllowOverride All
               Order allow,deny
