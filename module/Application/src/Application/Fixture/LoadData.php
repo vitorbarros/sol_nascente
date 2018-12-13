@@ -26,15 +26,24 @@ class LoadData extends AbstractFixture implements OrderedFixtureInterface
                 ->setEventFinishAt(new \DateTime("now +2 day"));
 
             //criando o ticket
-            $ticket = new Ticket();
-            $ticket->setTicketLot("Lote 1")
+            $ticket1 = new Ticket();
+            $ticket1->setTicketLot("Lote 1")
                 ->setTicketQuantity(100)
                 ->setTicketInitialQuantity(100)
                 ->setTicketPrice(10000)
                 ->setEvent($event);
 
+            //criando o ticket
+            $ticket2 = new Ticket();
+            $ticket2->setTicketLot("Lote 2")
+                ->setTicketQuantity(50)
+                ->setTicketInitialQuantity(50)
+                ->setTicketPrice(20000)
+                ->setEvent($event);
+
             $manager->persist($event);
-            $manager->persist($ticket);
+            $manager->persist($ticket1);
+            $manager->persist($ticket2);
             $manager->flush();
         }
     }

@@ -74,6 +74,14 @@ class Ticket
      */
     private $event;
 
+    /**
+     * @var Cart
+     *
+     * One Category has Many Categories.
+     * @ORM\OneToMany(targetEntity="Cart", mappedBy="ticket")
+     */
+    private $carts;
+
     public function __construct(array $options = [])
     {
         (new Hydrator\ClassMethods())->hydrate($options, $this);
@@ -179,6 +187,24 @@ class Ticket
     }
 
     /**
+     * @param $value
+     * @return string
+     */
+    public function setFormattedTicketPrice($value)
+    {
+        if ($value) {
+            $newValue = str_split($value);
+
+            $lastPosition = count($newValue) - 1;
+            $antLastPosition = $lastPosition - 1;
+            $strAfterDivider = "," . $newValue[$antLastPosition] . $newValue[$lastPosition];
+            return "R$ " . substr($value, 0, -2) . $strAfterDivider;
+        }
+
+        return $value;
+    }
+
+    /**
      * @param int $ticketPrice
      * @return Ticket
      */
@@ -215,12 +241,11 @@ class Ticket
     }
 
     /**
-     * @param \DateTime $ticketUpdatedAt
-     * @return Ticket
+     * @ORM\PreUpdate
      */
-    public function setTicketUpdatedAt($ticketUpdatedAt)
+    public function setTicketUpdatedAt()
     {
-        $this->ticketUpdatedAt = $ticketUpdatedAt;
+        $this->ticketUpdatedAt = new \DateTime("now");
         return $this;
     }
 
@@ -239,6 +264,24 @@ class Ticket
     public function setEvent($event)
     {
         $this->event = $event;
+        return $this;
+    }
+
+    /**
+     * @return Cart
+     */
+    public function getCarts()
+    {
+        return $this->carts;
+    }
+
+    /**
+     * @param Cart $carts
+     * @return Ticket
+     */
+    public function setCarts($carts)
+    {
+        $this->carts = $carts;
         return $this;
     }
 }

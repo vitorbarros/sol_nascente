@@ -19,6 +19,10 @@ class IndexController extends AbstractActionController
         $this->eventService = new EventService($entityManager);
     }
 
+    /**
+     * @desc Home
+     * @return ViewModel
+     */
     public function indexAction()
     {
         return new ViewModel([
@@ -26,8 +30,30 @@ class IndexController extends AbstractActionController
         ]);
     }
 
+    /**
+     * @desc Pagina de detalhes do evento
+     * @return ViewModel
+     */
     public function detailAction()
     {
+        //verificando o parametro na url
+        $id = $this->params()->fromRoute('id');
 
+        if ($id == null) {
+            $this->redirect()->toRoute('home');
+        }
+
+        return new ViewModel([
+            'event' => $this->eventService->getEventInCache($id)
+        ]);
+    }
+
+    /**
+     * @desc Página de obrigado
+     * @return ViewModel
+     */
+    public function successAction()
+    {
+        return new ViewModel();
     }
 }

@@ -10,6 +10,9 @@ if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['RE
     return false;
 }
 
+//definindo o timezone
+date_default_timezone_set('America/Sao_Paulo');
+
 // Setup autoloading
 require 'init_autoloader.php';
 

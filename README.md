@@ -1,4 +1,4 @@
-ZendSkeletonApplication
+Sistema Sol Nascente
 =======================
 
 Introduction

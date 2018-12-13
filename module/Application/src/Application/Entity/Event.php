@@ -214,12 +214,11 @@ class Event
     }
 
     /**
-     * @param mixed $eventUpdatedAt
-     * @return Event
+     * @ORM\PreUpdate
      */
-    public function setEventUpdatedAt($eventUpdatedAt)
+    public function setEventUpdatedAt()
     {
-        $this->eventUpdatedAt = $eventUpdatedAt;
+        $this->eventUpdatedAt = new \DateTime("now");
         return $this;
     }
 

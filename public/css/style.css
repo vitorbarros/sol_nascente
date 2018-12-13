@@ -26,3 +26,6 @@ h3, h2, h1, p {
     margin: 10px 0;
 }
 
+#alertErr {
+    display: none;
+}

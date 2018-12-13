@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <?php if ($this->event) : ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-10 col-lg-10">
+                    <h1>Informações do seu pedido</h1>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <div id="timer"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-md-12">
+                    <h2>Detalhes do pedido</h2>
+                    <p>nome do evento: <?php echo $this->event->getEventName() ?></p>
+                    <p>início: <?php echo $this->event->getEventStartAt()->format("d/m/Y H:i") ?></p>
+                    <p>fim: <?php echo $this->event->getEventFinishAt()->format("d/m/Y H:i") ?></p>
+                    <p>Número de entradas selecionadas: <?php echo $this->cartData['quantitySelected']; ?></p>
+                    <p>Valor por entrada: <?php echo $this->ticket->getFormattedTicketPrice(); ?></p>
+                    <p>Valor
+                        total: <?php echo $this->ticket->setFormattedTicketPrice(($this->ticket->getTicketPrice() * $this->cartData['quantitySelected'])) ?></p>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h3>Pagamento</h3>
+                    <br>
+                    <form id="order">
+                        <input type="hidden" id="cart" value="<?php echo $this->cart['cart_id']; ?>" name="cart">
+                        <input type="hidden" id="amount"
+                               value="<?php echo $this->ticket->getTicketPrice() * $this->cartData['quantitySelected']; ?>"
+                               name="amount">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="name">Nome</label>
+                                    <input type="text" id="name" name="name" class="form-control"
+                                           placeholder="Informe seu nome">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                           placeholder="Informe seu e-mail">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="err">
+                                    <div class="alert alert-danger" role="alert" id="alertErr"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <button type="submit" class="btn btn-success">Finalizar compra</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php else : ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 div md-12 div-lg-12">
+                    <h1>Evento não selecionado, ou tempo para compra expirado. <br> <a
+                                href="<?php echo $this->url('home') ?>">Clique aqui e volte para
+                            a lista de eventos para iniciar
+                            novamente o processo de compra.</a></h1>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

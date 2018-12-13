@@ -1,1 +1,66 @@
-teste
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h1><?php echo $this->event->getEventName(); ?></h1>
+                <p><?php echo $this->event->getEventDescription(); ?></p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="date-content">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <p><span>Início:</span> <?php echo $this->event->getEventStartAt()->format("d/m/Y H:i") ?></p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <p><span>Fim:</span> <?php echo $this->event->getEventFinishAt()->format("d/m/Y H:i") ?></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <form id="formLot">
+            <div class="row">
+                <div class="lot-content">
+                    <?php foreach ($this->event->getTickets() as $k => $ticket) : ?>
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+
+                            <input type="hidden" id="availableQuantity_<?php echo $k ?>"
+                                   value="<?php echo $ticket->getTicketQuantity() ?>">
+
+                            <input type="hidden" id="event_id_<?php echo $k ?>"
+                                   value="<?php echo $this->event->getEventId() ?>">
+
+                            <label for="lot_<?php echo $k ?>"><?php echo $ticket->getTicketLot() ?></label>
+
+                            <?php if ($k == 0) : ?>
+                                <input type="radio" name="lot" value="<?php echo $ticket->getTicketId() ?>"
+                                       id="lot_<?php echo $k ?>" checked>
+                            <?php else : ?>
+                                <input type="radio" name="lot" value="<?php echo $ticket->getTicketId() ?>"
+                                       id="lot_<?php echo $k ?>">
+                            <?php endif; ?>
+
+                            <p><span>Entradas disponíveis:</span> <?php echo $ticket->getTicketQuantity() ?>
+                                de <?php echo $ticket->getTicketInitialQuantity() ?></p>
+                            <p><span>Preço por entrada:</span> <?php echo $ticket->getFormattedTicketPrice() ?></p>
+
+                            <br>
+                            <br>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <label for="quantitySelected">Quantidade</label><br>
+                    <input type="number" value="1" name="quantitySelected" id="quantitySelected">
+                    <br>
+                    <br>
+                    <button class="btn btn-success" type="submit">Adicionar ao carrinho</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

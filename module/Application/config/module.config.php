@@ -9,6 +9,7 @@
 
 namespace Application;
 
+use Application\Controller\CheckoutController;
 use Application\Controller\IndexController;
 
 return array(
@@ -58,6 +59,9 @@ return array(
         'factories' => array(
             'index' => function ($sm) {
                 return new IndexController($sm->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
+            },
+            'checkout' => function ($sm) {
+                return new CheckoutController($sm->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
             }
         ),
     ),
@@ -75,6 +79,9 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy',
         ),
     ),
     'doctrine' => array(
