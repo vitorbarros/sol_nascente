@@ -1,80 +1,99 @@
 Sistema Sol Nascente
 =======================
 
-Introduction
-------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
-
-Installation
+Instalação
 ------------
 
-Using Composer (recommended)
+Requisitos para instalação
 ----------------------------
-The recommended way to get a working copy of this project is to clone the repository
-and use `composer` to install dependencies using the `create-project` command:
 
-    curl -s https://getcomposer.org/installer | php --
-    php composer.phar create-project -sdev --repository-url="https://packages.zendframework.com" zendframework/skeleton-application path/to/install
+ - PHP 5.6 / 7.0.
+ - Ter o composer instalado.
+ - MySql
+ - Git
+ 
+Instalação
+----------------------------
 
-Alternately, clone the repository and manually invoke `composer` using the shipped
-`composer.phar`:
+ clone o projeto para a sua máquina.
 
-    cd my/project/dir
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git
-    cd ZendSkeletonApplication
-    php composer.phar self-update
-    php composer.phar install
+ `git cone https://github.com/vitorbarros/sol_nascente.git`
+ 
+ Acesse a pasta do projeto e execute o seguinte comando
+ 
+ `composer install`
+ 
+  Após a instalação das dependências acesse a seguinte pasta
+  
+  `config/autoload`
+  
+  crie o seguinte arquivo
+  
+  `doctrine_orm.local.php`
+  
+  conteúdo do arquivo
+  
+```php
+return array(
+     'doctrine' => array(
+         'connection' => array(
+             'orm_default' => array(
+                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                 'params' => array(
+                     'host' => 'localhost',
+                     'port' => '3306',
+                     'user' => 'root', //modificar de acordo com sua config
+                     'password' => 'root', //modificar de acordo com sua config
+                     'dbname' => 'sol_nascente_db', //modificar de acordo com sua config
+                 ),
+             ),
+         ),
+     ),
+ );
+ ```
+ 
+  Accesse seu banco de dados e cria o banco vazío 
+  de acordo com o nome que colocou na configuração anterior.
+  
+  Execute o seguinte comando no terminal (tenha certeza que está na pasta do projeto)
+  
+  `php public/index.php orm:schema-tool:update --force`
+  
+  Após a execução desse comando exzecute o seguinte
+  
+  `php public/index.php data-fixture:import`
+  
+  Após isso o sistema está pronto para rodar.
+  
+  Para rodar existem 2 maneiras
+  
+  1 - Apache 
+  
+  Caso use o apache será necessári criar um VHost apontando o document root para a psta public do projeto
+   
+  ### Apache Setup
+  
+      <VirtualHost *:80>
+          ServerName zf2-tutorial.localhost
+          DocumentRoot /path/to/zf2-tutorial/public
+          SetEnv APPLICATION_ENV "development"
+          <Directory /path/to/zf2-tutorial/public>
+              DirectoryIndex index.php
+              AllowOverride All
+              Order allow,deny
+              Allow from all
+          </Directory>
+      </VirtualHost>
 
-(The `self-update` directive is to ensure you have an up-to-date `composer.phar`
-available.)
+  ###
+  2 - Servidor do PHP
+  
+  Essa é a maneira mais simples. Acesse a pasta public do projeto através do seu terminal e execute o seguinte comando
+  
+  `php -S localhost:8000`
 
-Another alternative for downloading the project is to grab it via `curl`, and
-then pass it to `tar`:
 
-    cd my/project/dir
-    curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-
-You would then invoke `composer` to install dependencies per the previous
-example.
-
-Using Git submodules
---------------------
-Alternatively, you can install using native git submodules:
-
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git --recursive
-
-Web Server Setup
-----------------
-
-### PHP CLI Server
-
-The simplest way to get started if you are using PHP 5.4 or above is to start the internal PHP cli-server in the root directory:
-
-    php -S 0.0.0.0:8080 -t public/ public/index.php
-
-This will start the cli-server on port 8080, and bind it to all network
-interfaces.
-
-**Note: ** The built-in CLI server is *for development only*.
-
-### Apache Setup
-
-To setup apache, setup a virtual host to point to the public/ directory of the
-project and you should be ready to go! It should look something like below:
-
-    <VirtualHost *:80>
-        ServerName zf2-tutorial.localhost
-        DocumentRoot /path/to/zf2-tutorial/public
-        SetEnv APPLICATION_ENV "development"
-        <Directory /path/to/zf2-tutorial/public>
-            DirectoryIndex index.php
-            AllowOverride All
-            Order allow,deny
-            Allow from all
-        </Directory>
-    </VirtualHost>
+  Accesse o link no seu navegador e pronto.
 
 
 
@@ -86,5 +105,6 @@ project and you should be ready to go! It should look something like below:
 
 
 
-php public/index.php data-fixture:import
-php public/index.php orm:schema-tool:update --force
+
+
+
