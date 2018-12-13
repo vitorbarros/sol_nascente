@@ -52,7 +52,7 @@ return array(
  );
  ```
  
-  Accesse seu banco de dados e crie o banco.
+  Accesse seu banco de dados e crie o banco
   de acordo com o nome que colocou na configuração anterior.
   
   Execute o seguinte comando no terminal (tenha certeza que está na pasta do projeto)
