@@ -69,13 +69,51 @@ class CheckoutService
      */
     public function addToCart($data)
     {
-        //verificando a concorrencia
-        sleep(5);
-        $this->verifyConcurrency($data);
+        $date = new \DateTime("now");
+        $date->modify("+15 minutes");
 
-        //persistindo os dados
-        return $this->cart($data);
+        $this->entityManager->getConnection()->beginTransaction();
+        $exceptionEntity = null;
+
+        try {
+
+            $this->ticket = $this->ticketRepository->find($data['ticket_id'], LockMode::OPTIMISTIC, $data['v']);
+
+            //validando as quantidades para evitar alguma falha na validacao do front
+            if ($this->ticket->getTicketQuantity() < $data['quantitySelected']) {
+                throw new \Exception("A quantidade de entradas não pode ser maior do que a quantidade disponível.");
+            }
+
+            $this->ticket->setTicketQuantity(intval($this->ticket->getTicketQuantity() - $data['quantitySelected']));
+
+            sleep(5);
+
+            //atualizando o ticket
+            $this->entityManager->persist($this->ticket);
+
+            //criando o registro do carrinho
+            $this->cart = new Cart([
+                'ticket' => $this->ticket,
+                'cart_data' => json_encode($data),
+                'cart_expires_at' => $date
+            ]);
+
+            $this->entityManager->persist($this->cart);
+
+            $this->entityManager->flush();
+            $this->entityManager->getConnection()->commit();
+
+        } catch (OptimisticLockException $e) {
+            $this->entityManager->getConnection()->rollBack();
+            throw new \Exception("infelizmente alguémm acabou de concluir a reserva desse ingresso.");
+        } catch (\Exception $e) {
+            $this->entityManager->getConnection()->rollBack();
+            throw $e;
+        }
+
+        return $this->cart->toArray();
     }
+
 
     /**
      * @desc Metodo responsavel por buscar as informacoes do evento
@@ -164,65 +202,5 @@ class CheckoutService
         }
 
         return $this->order;
-    }
-
-    /**
-     * @desc Metoto que verifica a concorrencia
-     * @param $data
-     * @return bool
-     * @throws \Exception
-     */
-    private function verifyConcurrency($data)
-    {
-        try {
-
-            $this->ticket = $this->ticketRepository->find($data['ticket_id'], LockMode::OPTIMISTIC, $data['v']);
-
-        } catch (OptimisticLockException $e) {
-
-            $this->ticket = $this->ticketRepository->find($data['ticket_id']);
-            if ($this->ticket->getTicketQuantity() <= 0) {
-                throw new \Exception("infelizmente alguémm acabou de concluir a reserva desse ingresso e ele está esgotado no momento");
-            }
-        }
-    }
-
-    private function cart($data)
-    {
-        $date = new \DateTime("now");
-        $date->modify("+15 minutes");
-
-        $this->entityManager->getConnection()->beginTransaction();
-
-        try {
-
-            //validando as quantidades para evitar alguma falha na validacao do front
-            if ($this->ticket->getTicketQuantity() < $data['quantitySelected']) {
-                throw new \Exception("A quantidade de entradas não pode ser maior do que a quantidade disponível.");
-            }
-
-            $this->ticket->setTicketQuantity(intval($this->ticket->getTicketQuantity() - $data['quantitySelected']));
-
-            //atualizando o ticket
-            $this->entityManager->persist($this->ticket);
-
-            //criando o registro do carrinho
-            $this->cart = new Cart([
-                'ticket' => $this->ticket,
-                'cart_data' => json_encode($data),
-                'cart_expires_at' => $date
-            ]);
-
-            $this->entityManager->persist($this->cart);
-
-            $this->entityManager->flush();
-            $this->entityManager->getConnection()->commit();
-
-        } catch (\Exception $e) {
-            $this->entityManager->getConnection()->rollBack();
-            throw $e;
-        }
-
-        return $this->cart->toArray();
     }
 }
