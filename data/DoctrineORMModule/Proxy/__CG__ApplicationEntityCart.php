@@ -64,10 +64,10 @@ class Cart extends \Application\Entity\Cart implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartId', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartData', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartCreatedAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartUpdatedAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartStatus', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartExpiresAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'ticket'];
+            return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartId', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartData', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartCreatedAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartUpdatedAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartStatus', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartExpiresAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'ticket', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'version'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartId', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartData', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartCreatedAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartUpdatedAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartStatus', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartExpiresAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'ticket'];
+        return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartId', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartData', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartCreatedAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartUpdatedAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartStatus', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'cartExpiresAt', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'ticket', '' . "\0" . 'Application\\Entity\\Cart' . "\0" . 'version'];
     }
 
     /**
@@ -340,6 +340,28 @@ class Cart extends \Application\Entity\Cart implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArray', []);
 
         return parent::toArray();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getVersion()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVersion', []);
+
+        return parent::getVersion();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setVersion($version)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVersion', [$version]);
+
+        return parent::setVersion($version);
     }
 
 }
