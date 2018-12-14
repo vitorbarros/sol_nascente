@@ -87,8 +87,6 @@ class CheckoutService
 
             $this->ticket->setTicketQuantity(intval($this->ticket->getTicketQuantity() - $data['quantitySelected']));
 
-            sleep(5);
-
             //atualizando o ticket
             $this->entityManager->persist($this->ticket);
 
