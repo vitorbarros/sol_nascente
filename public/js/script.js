@@ -53,7 +53,7 @@ $(function () {
                 window.location.href = "/data/checkout";
             },
             error: function (data) {
-
+                alert(data.responseJSON.message);
             }
         });
     });
