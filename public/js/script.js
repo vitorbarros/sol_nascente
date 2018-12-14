@@ -55,6 +55,7 @@ $(function () {
             },
             error: function (data) {
                 alert(data.responseJSON.message);
+                window.location.reload();
             }
         });
     });

@@ -80,6 +80,8 @@ class CheckoutService
             //buscando os tickets na memoria
             $this->ticket = $this->ticketRepository->find($data['ticket_id'], LockMode::OPTIMISTIC, $data['v']);
 
+            sleep(5);
+
             //validando as quantidades para evitar alguma falha na validacao do front
             if ($this->ticket->getTicketQuantity() < $data['quantitySelected']) {
                 throw new \Exception("A quantidade de entradas não pode ser maior do que a quantidade disponível.");
