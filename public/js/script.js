@@ -22,7 +22,8 @@ $(function () {
         //validando no front se a quantidade informada e menor ou igual a zero ou acima do limite disponivel
 
         var quantitySelectedInt = parseInt(quantitySelected.val()),
-            availableQuantity = $("#availableQuantity_" + indexChecked);
+            availableQuantity = $("#availableQuantity_" + indexChecked),
+            v = $("#v_" + indexChecked);
 
         if (isNaN(quantitySelectedInt) || quantitySelectedInt <= 0 || quantitySelectedInt > parseInt(availableQuantity.val())) {
             alert("A quantidade de entradas não pode ser menor ou igual a zero ou acima da quantidade disponível");
@@ -34,6 +35,7 @@ $(function () {
         formData.append('event_id', $("#event_id_" + indexChecked).val());
         formData.append('ticket_id', $("#lot_" + indexChecked).val());
         formData.append('quantitySelected', quantitySelected.val());
+        formData.append('v', v.val());
 
         $.ajax({
             type: "POST",
@@ -48,7 +50,6 @@ $(function () {
                 btn.removeAttr('disabled');
             },
             success: function (data) {
-
                 Cookies.set('cart', JSON.stringify(data.data), {expires: (1 / 48) / 2});
                 window.location.href = "/data/checkout";
             },

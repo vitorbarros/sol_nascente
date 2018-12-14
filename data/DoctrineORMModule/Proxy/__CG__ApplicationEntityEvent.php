@@ -64,10 +64,10 @@ class Event extends \Application\Entity\Event implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventId', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventName', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventDescription', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventExcerpt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventStartAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventFinishAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventCreatedAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventUpdatedAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventStatus', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'tickets'];
+            return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventId', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventName', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventDescription', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventExcerpt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventStartAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventFinishAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventCreatedAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventUpdatedAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventStatus', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'tickets', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'version'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventId', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventName', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventDescription', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventExcerpt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventStartAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventFinishAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventCreatedAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventUpdatedAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventStatus', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'tickets'];
+        return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventId', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventName', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventDescription', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventExcerpt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventStartAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventFinishAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventCreatedAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventUpdatedAt', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'eventStatus', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'tickets', '' . "\0" . 'Application\\Entity\\Event' . "\0" . 'version'];
     }
 
     /**
@@ -395,6 +395,28 @@ class Event extends \Application\Entity\Event implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTickets', [$tickets]);
 
         return parent::setTickets($tickets);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getVersion()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVersion', []);
+
+        return parent::getVersion();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setVersion($version)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVersion', [$version]);
+
+        return parent::setVersion($version);
     }
 
 }

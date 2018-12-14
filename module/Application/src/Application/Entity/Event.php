@@ -4,6 +4,7 @@ namespace Application\Entity;
 
 use Zend\Stdlib\Hydrator;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Version;
 
 /**
  * Event
@@ -88,6 +89,9 @@ class Event
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="event")
      */
     private $tickets;
+
+    /** @ORM\Version @ORM\Column(type="integer") */
+    private $version;
 
     public function __construct(array $options = [])
     {
@@ -273,6 +277,24 @@ class Event
     public function setTickets($tickets)
     {
         $this->tickets = $tickets;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param mixed $version
+     * @return Event
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
         return $this;
     }
 }

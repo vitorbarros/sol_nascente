@@ -9,6 +9,8 @@ use Application\Entity\Ticket;
 use Application\Repository\CartRepository;
 use Application\Repository\TicketRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\LockMode;
+use Doctrine\ORM\OptimisticLockException;
 
 class CheckoutService
 {
@@ -70,18 +72,18 @@ class CheckoutService
         $date = new \DateTime("now");
         $date->modify("+15 minutes");
 
-        //buscando os tickets na memoria
-        $this->ticket = $this->entityManager->getReference($this->ticket, $data['ticket_id']);
-
-        //validando as quantidades para evitar alguma falha na validacao do front
-        if ($this->ticket->getTicketQuantity() < $data['quantitySelected']) {
-            throw new \Exception("A quantidade de entradas não pode ser maior do que a quantidade disponível");
-        }
-
         //decrementando a quantidade de tickets disponiveis da base
         $this->entityManager->getConnection()->beginTransaction();
 
         try {
+
+            //buscando os tickets na memoria
+            $this->ticket = $this->ticketRepository->find($data['ticket_id'], LockMode::OPTIMISTIC, $data['v']);
+
+            //validando as quantidades para evitar alguma falha na validacao do front
+            if ($this->ticket->getTicketQuantity() < $data['quantitySelected']) {
+                throw new \Exception("A quantidade de entradas não pode ser maior do que a quantidade disponível.");
+            }
 
             $this->ticket->setTicketQuantity(intval($this->ticket->getTicketQuantity() - $data['quantitySelected']));
 
@@ -102,9 +104,9 @@ class CheckoutService
             $this->entityManager->flush();
             $this->entityManager->getConnection()->commit();
 
-        } catch (\Exception $e) {
+        } catch (OptimisticLockException $e) {
             $this->entityManager->getConnection()->rollBack();
-            throw $e;
+            throw new \Exception("infelizmente alguémm acabou de concluir a reserva desse ingresso e ele está esgotado no momento");
         }
 
         return $this->cart->toArray();

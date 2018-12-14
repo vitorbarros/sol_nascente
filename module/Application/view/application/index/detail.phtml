@@ -25,6 +25,9 @@
                     <?php foreach ($this->event->getTickets() as $k => $ticket) : ?>
                         <div class="col-sm-12 col-md-6 col-lg-6">
 
+                            <input type="hidden" id="v_<?php echo $k ?>"
+                                   value="<?php echo $ticket->getVersion() ?>">
+
                             <input type="hidden" id="availableQuantity_<?php echo $k ?>"
                                    value="<?php echo $ticket->getTicketQuantity() ?>">
 

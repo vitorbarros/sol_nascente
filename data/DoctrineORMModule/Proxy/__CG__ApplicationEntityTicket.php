@@ -64,10 +64,10 @@ class Ticket extends \Application\Entity\Ticket implements \Doctrine\ORM\Proxy\P
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketId', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketQuantity', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketInitialQuantity', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketLot', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketPrice', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketCreatedAt', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketUpdatedAt', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'event', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'carts'];
+            return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketId', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketQuantity', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketInitialQuantity', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketLot', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketPrice', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketCreatedAt', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketUpdatedAt', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'event', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'carts', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'version'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketId', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketQuantity', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketInitialQuantity', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketLot', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketPrice', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketCreatedAt', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketUpdatedAt', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'event', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'carts'];
+        return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketId', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketQuantity', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketInitialQuantity', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketLot', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketPrice', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketCreatedAt', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'ticketUpdatedAt', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'event', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'carts', '' . "\0" . 'Application\\Entity\\Ticket' . "\0" . 'version'];
     }
 
     /**
@@ -395,6 +395,28 @@ class Ticket extends \Application\Entity\Ticket implements \Doctrine\ORM\Proxy\P
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCarts', [$carts]);
 
         return parent::setCarts($carts);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getVersion()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVersion', []);
+
+        return parent::getVersion();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setVersion($version)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVersion', [$version]);
+
+        return parent::setVersion($version);
     }
 
 }

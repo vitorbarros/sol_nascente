@@ -4,6 +4,7 @@ namespace Application\Entity;
 
 use Zend\Stdlib\Hydrator;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Version;
 
 /**
  * Cart
@@ -66,6 +67,9 @@ class Cart
      * @ORM\JoinColumn(name="ticket", referencedColumnName="ticket_id")
      */
     private $ticket;
+
+    /** @ORM\Version @ORM\Column(type="integer") */
+    private $version;
 
 
     public function __construct(array $options = [])
@@ -207,5 +211,23 @@ class Cart
     public function toArray()
     {
         return (new Hydrator\ClassMethods())->extract($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param mixed $version
+     * @return Cart
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+        return $this;
     }
 }

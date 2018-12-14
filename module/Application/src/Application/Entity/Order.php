@@ -4,6 +4,7 @@ namespace Application\Entity;
 
 use Zend\Stdlib\Hydrator;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Version;
 
 /**
  * Order
@@ -66,6 +67,9 @@ class Order
      * @ORM\Column(name="order_total_amount", type="integer", nullable=false)
      */
     private $orderTotalAmount;
+
+    /** @ORM\Version @ORM\Column(type="integer") */
+    private $version;
 
     public function __construct(array $options = [])
     {
@@ -196,6 +200,24 @@ class Order
     public function setOrderTotalAmount($orderTotalAmount)
     {
         $this->orderTotalAmount = $orderTotalAmount;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param mixed $version
+     * @return Order
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
         return $this;
     }
 }
